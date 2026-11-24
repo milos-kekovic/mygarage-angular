@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "mybank": {
+    "mygarage": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mybank:build:production"
+              "buildTarget": "mygarage:build:production"
             },
             "development": {
-              "buildTarget": "mybank:build:development"
+              "buildTarget": "mygarage:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,0 +1,10 @@
+<h2>Dashboard</h2>
+
+<app-account
+  [balance]="balance()"
+  [canWithdraw]="canWithdraw()"
+  [isLoading]="isLoading()"
+  [error]="error()"
+  (depositRequest)="deposit()"
+  (withdrawRequest)="withdraw()"
+></app-account>
