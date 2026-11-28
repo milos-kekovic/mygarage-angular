@@ -1,10 +1,20 @@
-<h2>Dashboard</h2>
+<div class="dashboard">
+  <header class="dashboard-header">
+    <h2>My Vehicles</h2>
+    <p>Manage your vehicles in one place</p>
+  </header>
 
-<app-account
-  [balance]="balance()"
-  [canWithdraw]="canWithdraw()"
-  [isLoading]="isLoading()"
-  [error]="error()"
-  (depositRequest)="deposit()"
-  (withdrawRequest)="withdraw()"
-></app-account>
+  @if (isLoading()) {
+    <p class="loading-message">Loading vehicles...</p>
+  } @else if (error()) {
+    <p class="error-message">{{ error() }}</p>
+  } @else {
+    <div class="cars-grid">
+      @for (car of cars(); track car.id) {
+        <app-car-card [car]="car" />
+      } @empty {
+        <p class="empty-message">No vehicles found.</p>
+      }
+    </div>
+  }
+</div>

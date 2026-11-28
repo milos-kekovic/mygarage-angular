@@ -1,22 +1,27 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth-guard';
+import { guestGuard } from './guards/guest-guard';
 
 export const routes: Routes = [
     {
-        path: 'accounts/:id',
-        loadComponent: () =>
-            import('./pages/account-details/account-details')
-            .then(m => m.AccountDetails)
+        path: 'login',
+        canActivate: [guestGuard],
+        loadComponent: () => 
+            import('./pages/login/login')
+                .then(m => m.Login)
     },
     {
         path: '',
+        canActivate: [authGuard],
         loadComponent: () => 
             import('./pages/dashboard/dashboard')
-            .then(m => m.Dashboard)
+                .then(m => m.Dashboard)
     },
     {
-        path: 'transactions',
+        path: 'parking',
+        canActivate: [authGuard],
         loadComponent: () => 
-            import('./pages/transactions/transactions')
-            .then(m => m.Transactions)
+            import('./pages/parking/parking')
+                .then(m => m.Parking)
     }
 ];

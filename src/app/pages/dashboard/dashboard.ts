@@ -1,31 +1,28 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Account } from '../../components/account/account';
-import { AccountService } from '../../services/account';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { CarService } from '../../services/car';
+import { AuthService } from '../../services/auth';
+import { Car } from '../../models/car';
+import { CarCard } from '../../components/car-card/car-card';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Account],
+  imports: [CarCard],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss'
 })
-
 export class Dashboard implements OnInit {
-  private readonly accountService = inject(AccountService);
 
-  protected readonly balance = this.accountService.balance;
-  protected readonly canWithdraw = this.accountService.canWithdraw;
-  protected readonly isLoading = this.accountService.isLoading;
-  protected readonly error = this.accountService.error;
+  private readonly carService = inject(CarService);
+
+  readonly cars = this.carService.cars;
+  readonly isLoading = this.carService.isLoading;
+  readonly error = this.carService.error;
 
   ngOnInit(): void {
-    this.accountService.loadAccount('1');
+    this.carService.loadCars();
   }
 
-  deposit(): void {
-    this.accountService.deposit();
-  }
-
-  withdraw(): void {
-    this.accountService.withdraw();
+  protected onViewDetails(carId: string): void {
+    console.log('Selected car ID:', carId);
   }
 }

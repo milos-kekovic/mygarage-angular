@@ -1,12 +1,21 @@
-<h1>{{ title() }}</h1>
-<p>Vehicle Management</p>
+@if (authService.isLoading()) {
+  <p>Checking session...</p>
+} @else {
+  @if (authService.session()) {
+    <nav class="navbar">
+      <h2 class="nabar-title">My Garage</h2>
 
-<nav>
-  <a routerLink="/">Dashboard</a>
-  |
-  <a routerLink="/transactions">Transactions</a>
-  |
-  <a routerLink="/accounts/1">Account Details</a>
-</nav>
+      <div class="navbar-actions">
+        <a routerLink="/">Dashboard</a>
+        <a routerLink="/parking">Parking</a>
+        <button (click)="logout()">Logout</button>
+      </div>
+    </nav>
+  }
 
-<router-outlet />
+  <main class="page-content">
+    <router-outlet />
+  </main>
+}
+
+

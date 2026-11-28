@@ -1,0 +1,82 @@
+<div class="parking-page">
+  <header class="parking-header">
+    <h2>Where did I park?</h2>
+    <p>Find your vehicle at a glance.</p>
+  </header>
+
+  @if (isLoading()) {
+    <p class="loading-message">Loading vehicles...</p>
+  }
+
+  <div class="vehicle-selector">
+    @for(car of cars(); track car.id){
+      <button
+        type="button"
+        class="vehicle-card"
+        [class.selected]="selectedCarId() === car.id"
+        [disabled]="isSaving()"
+        (click)="selectCar(car.id)"
+      >
+        @if(car.brand_logo_url){
+          <img
+            [src]="car.brand_logo_url"
+            [alt]="car.brand"
+          />
+        }
+
+        <div class="vehicle-info">
+          <strong>{{ car.brand }} {{ car.model }}</strong>
+          
+          <span
+            class="parking-location"
+            [class.parked]="car.parking_slot"
+          >
+            {{ car.parking_slot ?? 'Not parked' }}
+          </span>
+        </div>
+
+      </button>
+    } @empty {
+      @if(!isLoading()){
+        <p>No vehicles found.</p>
+      }
+    }
+  </div>
+
+  <app-parking-map
+    [cars]="cars()"
+    (zoneSelected)="onZoneSelected($event)"
+  />
+
+  @if (isSaving()) {
+    <p class="saving-message">
+      Saving parking location...
+    </p>
+  }
+
+  @if (error()) {
+    <p class="error-message">{{ error() }}</p>
+  }
+
+  @if (selectedCar(); as car) {
+
+    <div class="parking-summary">
+
+      <div class="current-location">
+        <span>{{ car.brand }} — Current location</span>
+        <strong>{{ car.parking_slot ?? 'Not parked' }}</strong>
+      </div>
+
+      <button
+        type="button"
+        class="remove-button"
+        [disabled]="!car.parking_slot || isSaving()"
+        (click)="removeParking()"
+      >
+        Remove parking
+      </button>
+
+    </div>
+
+  }
+</div>

@@ -1,0 +1,40 @@
+.dashboard {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  .dashboard-header {
+    text-align: center;
+    margin-bottom: 24px;
+
+    h2 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    p {
+      color: #475569;
+      font-size: 15px;
+    }
+  }
+
+  .cars-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 24px;
+
+    app-car-card {
+      width: 360px;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .error-message {
+    color: #b91c1c;
+    padding: 16px;
+    background-color: #fee2e2;
+    border-radius: 8px;
+  }
+}

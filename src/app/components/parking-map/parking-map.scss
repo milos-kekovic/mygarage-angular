@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.map-container {
+  width: 100%;
+  height: clamp(400px, 65vh, 750px);
+
+  background-color: #dce8e7;
+  border: 1px solid #94a3b8;
+  border-radius: 20px;
+  overflow: hidden;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  cursor: grab;
+  touch-action: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
